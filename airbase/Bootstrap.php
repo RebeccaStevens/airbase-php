@@ -13,6 +13,9 @@ class Bootstrap {
 	/** @var Controller The controller for this page */
 	private $_controller;
 
+	/** @var string The namespace of the controllers */
+	private $_controllers_namespace;
+
 	/** @var string The path to the site's controllers */
 	private $_controllers_path;
 
@@ -21,7 +24,8 @@ class Bootstrap {
 	 *
 	 * @throws PageNotFoundException if the url of a page the does not exist.
 	 */
-	public function __construct($controllers_path, $get_var) {
+	public function __construct($controllers_namespace, $controllers_path, $get_var) {
+		$this->_controllers_namespace = $controllers_namespace;
 		$this->_controllers_path = $controllers_path;
 		$index = 0;
 		$this->_setUrl($get_var);							// set the url of the page
@@ -57,9 +61,9 @@ class Bootstrap {
 			throw new PageNotFoundException("The file: $file does not exist.");
 		}
 
-		require($file);																		// load the controller's file
-		$this->_controller = new $this->_url[$index]();		// construct a new controller
-		$index++;																					// done with this part of the url
+		$class = $this->_controllers_namespace . $this->_url[$index];
+		$this->_controller = new $class();		// construct a new controller
+		$index++;															// done with this part of the url
 	}
 
 	/**
