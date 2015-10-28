@@ -36,6 +36,21 @@ class SelectQuery extends AbstractQuery {
     }
 
     /**
+     * Add fields to the query.
+     * Grave Accents (`) do not need to be given - they will be added automatically.
+     *
+     * @param string $field A field to add to the query (more than 1 can be given)
+     * @return SelectQuery $this
+     */
+    public function field($field) {
+      $arguments = is_array($field) ? $field : func_get_args();
+      foreach ($arguments as $field) {
+        $this->_fields[] = str_replace($this->getGraveAccent(), '', $field);	// add the field to the array of fields, remove any `s for the field name
+      }
+      return $this;
+    }
+
+    /**
      * Specify the table(s) to use.
      * Grave Accents (`) do not need to be given - they will be added automatically.
      *
