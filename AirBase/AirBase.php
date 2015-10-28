@@ -21,7 +21,7 @@ final class AirBase {
 	 */
 	public static function init() {
 		if(isset(self::$me)) throw new \Exception('Cannot initialize AirBase again. This can only be done once.');
-		require_once __DIR__ . '/../../../vendor/autoload.php';
+		require_once __DIR__ . '/../vendor/autoload.php';
 		self::$me = new AirBase();
 	}
 
