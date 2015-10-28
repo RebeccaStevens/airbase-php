@@ -1,0 +1,16 @@
+{
+    "name": "slaymaster3000/AirBase-php",
+    "description": "a php framework I made (just as an experiment)",
+    "authors": [
+        {
+            "name": "slaymaster3000",
+            "email": "slaymaster3000@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+      "psr-4": {
+        "AirBase\\": "AirBase/"
+      }
+    }
+}
