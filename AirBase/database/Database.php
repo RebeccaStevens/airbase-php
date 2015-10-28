@@ -66,7 +66,7 @@ class Database extends PDO {
 	 * @param integer $fetchMode The fetch mode to use
 	 * @return mixed True if the query was successful or the results returned from the database if appropriate
 	 */
-	public function execute($sql, array $bindData, $fetchMode) {
+	public function execute($sql, array $bindData=array(), $fetchMode=null) {
 		$this->_lastQuery = $sql;
 
 		$sth = $this->prepare($sql);							// prepare the query to be executed
@@ -78,7 +78,7 @@ class Database extends PDO {
     if (isset($fetchMode)) {
 	    return $sth->fetchAll($fetchMode);			// get and return the results using the specified fetch mode
     }
-    return true;
+    return $sth->fetchAll($this->_fetchMode);
 	}
 
 	/**
